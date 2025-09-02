@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import reactLogo from "../assets/logo.svg";
 import LoginForm from "./LoginForm";
+import TaskPage from "../Task/TaskPage";
 import { MOCK_USERS } from "../data/users";
 import "./login.css";
 
@@ -8,6 +9,7 @@ const LoginPage = () => {
   const [loginSuccess, setLoginSuccess] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showTaskPage, setShowTaskPage] = useState(false);
 
   const handleLogin = (username: string, password: string) => {
     setErrorMessage("");
@@ -24,6 +26,20 @@ const LoginPage = () => {
       setErrorMessage("Invalid credentials, please try again.");
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const timer = setTimeout(() => {
+        setShowTaskPage(true);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoggedIn]);
+
+  if (showTaskPage) {
+    return <TaskPage />;
+  }
 
   if (isLoggedIn) {
     return (
