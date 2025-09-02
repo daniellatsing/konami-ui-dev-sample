@@ -1,0 +1,107 @@
+/* ADDTASK.TSX */
+.add-task-form {
+  display: flex;
+  flex-direction: row;
+  margin-block-start: 2.125rem;
+}
+
+.add-task-form input {
+  margin-right: 1.5rem;
+}
+
+input,
+.add-btn {
+  padding-block-start: 1rem;
+  padding-block-end: 1rem;
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+}
+
+input {
+  background-color: white;
+  border: 2px solid var(--input-border-grey);
+  padding-inline-start: 1.75rem;
+  width: 32rem;
+}
+
+.add-btn {
+  background-color: var(--maroon);
+  color: white;
+  border: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  justify-self: center;
+  padding-inline-start: 2.75rem;
+  padding-inline-end: 2.75rem;
+}
+
+/* TASKITEM.TSX */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline-start: 1.5rem;
+  padding-inline-end: 1.5rem;
+  padding-block-start: 1.75rem;
+  padding-block-end: 1.75rem;
+  margin: 0rem 2rem;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.task-name {
+  font-size: 1.5rem;
+}
+
+.save-btn,
+.cancel-btn,
+.delete-btn,
+.edit-btn {
+  background-color: white;
+  border: 0px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete-btn {
+  color: red;
+}
+
+.edit-btn {
+  color: var(--input-border-grey);
+}
+
+/* TASKLIST.TSX */
+div.task-list {
+  width: 54rem;
+}
+
+.empty-list-msg {
+  font-size: 1.5rem;
+}
+
+.task-divider {
+  height: 1px;
+  background-color: var(--divider-grey);
+  margin: 0.5rem 2rem;
+}
+
+/* TASKPAGE.TSX */
+.task-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+h1.task-header {
+  font-size: 2.5rem;
+  font-weight: bolder;
+  margin-block-end: 3.125rem;
+  text-align: center;
+}
