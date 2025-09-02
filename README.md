@@ -1,69 +1,29 @@
-# React + TypeScript + Vite
+# Konami Gaming - UI Developer II Code Sample
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+A React + TypeScript mini app that allows users to log in and manage tasks. All data is stored locally.
 
-Currently, two official plugins are available:
+## Setup
+1. Clone the repo
+2. Run `npm install`
+3. Run `npm start` to launch the app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Assumptions
+- Login: 
+    - Only provided mock users are valid
+    - No password complexity enforced
+    - Login state resets on refresh
+    - User data is stored locally
+    - No account creation; login credentials are predefined
+- Task List:
+    - Tasks are stored in local React state
+    - Task names are assumed to be short (under 100 characters) for UI purposes, but no hard limit is enforced
+    - Only one user can utilize the task list at a time
+- Design / UX:
+    - Users can add, edit, and delete tasks. "Save" and "Cancel" buttons replace "Edit" and "Delete" buttons when editing a task
+    - The app is made for desktop and tablet interfaces
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Future Improvements
+- Mobile-first responsive design
+- Adding server-side logic and SQL integration
+- Enhancing accessibility and overall UI/UX
