@@ -1,0 +1,85 @@
+/* LOGINFORM.TSX */
+form.user-form {
+  display: grid;
+  row-gap: 1.5rem;
+  margin-block-start: 1.5rem;
+  margin-block-end: 2.25rem;
+}
+
+.username-input,
+.password-input,
+.sign-in-btn {
+  width: 32rem;
+  padding-block-start: 1rem;
+  padding-block-end: 1rem;
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+}
+
+.username-input,
+.password-input {
+  background-color: white;
+  border: 2px solid var(--input-border-grey);
+  padding-inline-start: 1.75rem;
+}
+
+input::placeholder {
+  color: var(--input-placeholder-grey);
+}
+
+button.sign-in-btn {
+  background-color: var(--maroon);
+  color: white;
+  border: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  justify-self: center;
+  padding-inline-start: 1.75rem;
+  padding-inline-end: 1.75rem;
+  cursor: pointer;
+}
+
+.error {
+  font-size: 1.25rem;
+  color: red;
+  font-weight: bold;
+}
+
+/* LOGINPAGE.TSX */
+.container {
+  margin-top: 8rem;
+}
+
+img {
+  margin-block-end: 2.25rem;
+}
+
+h1.login-title {
+  font-size: 2rem;
+  font-weight: 100;
+  margin-block-end: 4.25rem;
+}
+
+a.forgot-pass {
+  color: var(--maroon);
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+div.success-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid black;
+  padding-inline-start: 2.5rem;
+  padding-inline-end: 2.5rem;
+  padding-block-start: 4rem;
+  padding-block-end: 4rem;
+  width: 25.125rem;
+}
+
+h1.login-success {
+  font-size: 1rem;
+  font-weight: bold;
+}
