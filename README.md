@@ -6,7 +6,7 @@ A React + TypeScript mini app that allows users to log in and manage tasks. All 
 ## Setup
 1. Clone the repo
 2. Run `npm install`
-3. Run `npm start` to launch the app
+3. Run `npm run dev` to launch the app
 
 ## Assumptions
 - Login: 
