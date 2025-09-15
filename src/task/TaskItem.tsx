@@ -1,24 +1,21 @@
-// Notes for future implementation:
-// Character limit for task name?
-// Accessibility in design (e.g, "edit" button)
-// Design choices in buttons ("save" vs. cancel)
-
 import React, { useState } from "react";
+import type { TaskItemProps } from "../types";
 
-interface Task {
-  id: number;
-  task: string;
-}
-
-interface TaskItemProps {
-  task: Task;
-  onDelete: (id: number) => void;
-  onEdit: (id: number, newTask: string) => void;
-}
-
-const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onEdit }) => {
+const TaskItem: React.FC<TaskItemProps> = ({
+  task,
+  subtasks,
+  onDelete,
+  onEdit,
+  onAddSubtask
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTask, setEditTask] = useState(task.task);
+
+  const [addingSubtask, setAddingSubtask] = useState(false);
+  const [newSubtaskText, setNewSubtaskText] = useState("");
+
+  const [editingSubtaskId, setEditingSubtaskId] = useState<number | null>(null);
+  const [editSubtaskText, setEditSubtaskText] = useState("");
 
   const handleSaveEdit = () => {
     if (editTask.trim() !== "") {
@@ -67,6 +64,71 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onEdit }) => {
               DELETE
             </button>
           </>
+        )}
+      </div>
+
+      <div className="subtask-container">
+        {subtasks.length === 0 && !addingSubtask && (
+          <span
+            onClick={() => setAddingSubtask(true)}
+          >
+            Click to add a subtask
+          </span>
+        )}
+
+        {addingSubtask && (
+          <div>
+            <input
+              value={newSubtaskText}
+              onChange={(e) => setNewSubtaskText(e.target.value)}
+              autoFocus
+            />
+            <button
+            className="save-btn"
+              onClick={() => {
+                if (newSubtaskText.trim() !== "") {
+                  onAddSubtask(newSubtaskText, task.id);
+                  setNewSubtaskText("");
+                  setAddingSubtask(false);
+                }
+              }}
+            >
+              SAVE
+            </button>
+            <button onClick={() => setAddingSubtask(false)}>CANCEL</button>
+          </div>
+        )}
+
+        {subtasks.map((sub) =>
+          editingSubtaskId === sub.id ? (
+            <div key={sub.id}>
+              <input
+                value={editSubtaskText}
+                onChange={(e) => setEditSubtaskText(e.target.value)}
+              />
+              <button
+                onClick={() => {
+                  onEdit(sub.id, editSubtaskText);
+                  setEditingSubtaskId(null);
+                }}
+              >
+                SAVE
+              </button>
+              <button className="cancel-btn" onClick={() => setEditingSubtaskId(null)}>CANCEL</button>
+            </div>
+          ) : (
+            <div key={sub.id}>
+              <span className="subtask-name"
+                onClick={() => {
+                  setEditingSubtaskId(sub.id);
+                  setEditSubtaskText(sub.task);
+                }}
+              >
+                {sub.task}
+              </span>
+              <button className="delete-btn" onClick={() => onDelete(sub.id)}>DELETE</button>
+            </div>
+          )
         )}
       </div>
     </div>

@@ -2,20 +2,17 @@ import React, { useState } from "react";
 import TaskList from "./TaskList";
 import AddTask from "./AddTask";
 import { MOCK_TASKS } from "../data/tasks";
+import type { Task } from "../types";
 import "./task.css";
-
-interface Task {
-  id: number;
-  task: string;
-}
 
 const TaskPage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>(MOCK_TASKS);
 
-  const addTask = (task: string) => {
+  const addTask = (task: string, parentId?: number) => {
     const newTask: Task = {
       id: Date.now(),
       task: task.trim(),
+      parentId,
     };
     setTasks([...tasks, newTask]);
   };
@@ -35,7 +32,12 @@ const TaskPage: React.FC = () => {
   return (
     <div className="task-container">
       <h1 className="task-header">To Do List</h1>
-      <TaskList tasks={tasks} onDelete={deleteTask} onEdit={editTask} />
+      <TaskList
+        tasks={tasks}
+        onDelete={deleteTask}
+        onEdit={editTask}
+        onAddSubtask={addTask}
+      />
 
       <AddTask onAdd={addTask} />
     </div>

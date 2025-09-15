@@ -68,12 +68,13 @@ input {
   cursor: pointer;
 }
 
-.delete-btn {
+.delete-btn, .cancel-btn {
   color: red;
 }
 
-.edit-btn {
+.edit-btn, .save-btn, .subtask-name {
   color: var(--input-border-grey);
+  cursor: pointer;
 }
 
 /* TASKLIST.TSX */

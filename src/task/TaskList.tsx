@@ -1,19 +1,16 @@
 import React from "react";
 import TaskItem from "./TaskItem";
+import type { TaskListProps } from "../types";
 
-interface Task {
-  id: number;
-  task: string;
-}
+const TaskList: React.FC<TaskListProps> = ({
+  tasks,
+  onDelete,
+  onEdit,
+  onAddSubtask,
+}) => {
+  const mainTasks = tasks.filter((t) => t.parentId === undefined);
 
-interface TaskListProps {
-  tasks: Task[];
-  onDelete: (id: number) => void;
-  onEdit: (id: number, newTask: string) => void;
-}
-
-const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onEdit }) => {
-  if (tasks.length === 0) {
+  if (mainTasks.length === 0) {
     return (
       <>
         <p className="empty-list-msg">No tasks yet...</p>
@@ -24,12 +21,22 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete, onEdit }) => {
   return (
     <div className="task-list">
       <div className="task-divider"></div>
-      {tasks.map((task) => (
-        <React.Fragment key={task.id}>
-          <TaskItem task={task} onDelete={onDelete} onEdit={onEdit} />
-          <div className="task-divider"></div>
-        </React.Fragment>
-      ))}
+      {mainTasks.map((task) => {
+        const subtasks = tasks.filter((t) => t.parentId === task.id);
+
+        return (
+          <React.Fragment key={task.id}>
+            <TaskItem
+              task={task}
+              subtasks={subtasks}
+              onDelete={onDelete}
+              onEdit={onEdit}
+              onAddSubtask={onAddSubtask}
+            />
+            <div className="task-divider"></div>
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 };
