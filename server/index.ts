@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { Pool } from "pg";
+import { Pool, type QueryResult } from "pg";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -29,9 +29,10 @@ pool.connect((e, client, release) => {
   }
 });
 
+// Get all employees
 app.get("/api/employees", async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM employees');
+    const result: QueryResult = await pool.query('SELECT * FROM employees');
     res.json(result.rows);
   } catch (e) {
     console.error(e);
@@ -39,6 +40,7 @@ app.get("/api/employees", async (req, res) => {
   }
 });
 
+// Get all tasks
 app.get("/api/tasks", async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM tasks');
@@ -46,6 +48,21 @@ app.get("/api/tasks", async (req, res) => {
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Database error' });
+  }
+});
+
+// Get tasks for specific employee
+app.post("/api/tasks", async (req, res) => {
+  const { task, person_id } = req.body;
+  try {
+    const result = await pool.query(
+      "INSERT INTO tasks (task_name, person_id) VALUES ($1, $2) RETURNING *", 
+      [task, person_id]
+    );
+    res.json(result.rows[0]);
+  } catch (e) {
+    console.error(e);
+    res.status(500).send("Error adding task");
   }
 });
 
